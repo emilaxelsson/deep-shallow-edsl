@@ -1,0 +1,26 @@
+name:                  deep-shallow-edsl
+version:               0.1
+synopsis:              Combining Deep and Shallow Embedding for EDSL
+description:           Slightly adapted code from the paper
+                       \"Combining Deep and Shallow Embedding for EDSL\"
+                       .
+                         * <http://www.cse.chalmers.se/~emax/documents/svenningsson2013combining.pdf>,
+                       .
+                         * <http://dx.doi.org/10.1007/978-3-642-40447-4_2>
+                       .
+                       The paper descibes a design pattern for embedded DSLs (EDSLs) where a
+                       combination of deep and shallow embedding is used in order to get most
+                       advantages from both approaches.
+license:               BSD3
+license-file:          LICENSE
+author:                Emil Axelsson
+maintainer:            emax@chalmers.se
+copyright:             Copyright (c) 2014, Emil Axelsson, Josef Svenningsson
+build-type:            Simple
+cabal-version:         >=1.10
+
+library
+  exposed-modules:     FunC
+  other-extensions:    GADTs, TypeOperators, FlexibleInstances, TypeFamilies, MultiParamTypeClasses, OverlappingInstances, RankNTypes
+  build-depends:       base >=4.6 && <4.7, mtl >=2.1 && <2.2, array >=0.4 && <0.5, containers >=0.5 && <0.6, tree-view >=0.4 && <0.5
+  default-language:    Haskell2010
