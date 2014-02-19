@@ -3,7 +3,7 @@
 {-# LANGUAGE TypeFamilies #-}
 
 -- | Slightly adapted code from the paper \"Combining Deep and Shallow Embedding for EDSL\"
--- (published in Trends in Functional Programming TFP 2012):
+-- (published in Trends in Functional Programming TFP 2013):
 --
 --   * <http://www.cse.chalmers.se/~emax/documents/svenningsson2013combining.pdf>
 --
