@@ -1,7 +1,7 @@
 deep-shallow-edsl
 =================
 
-Slightly adapted code from the paper "Combining Deep and Shallow Embedding for EDSL":
+Slightly adapted code from the paper "Combining Deep and Shallow Embedding for EDSL" (published in Trends in Functional Programming TFP 2012):
 
   * <http://www.cse.chalmers.se/~emax/documents/svenningsson2013combining.pdf>
   * <http://dx.doi.org/10.1007/978-3-642-40447-4_2>
@@ -14,7 +14,7 @@ In short, the idea is as follows:
   * High-level libraries (e.g. `Vector` and its operations) are implemented as shallow embeddings on top of `FunC`.
   * The `Syntactic` class is used to connect the deep and the shallow embeddings.
 
-The approach has the following advantages:
+The approach has several advantages:
 
   * **Simplicity**    -- Moving functionality to shallow embeddings helps keep the AST small without sacrificing expressiveness.
   * **Extensibility** -- New shallow embeddings can often be added without changing the deep embedding, or by just changing is slightly.

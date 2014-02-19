@@ -2,7 +2,8 @@
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE TypeFamilies #-}
 
--- | Slightly adapted code from the paper \"Combining Deep and Shallow Embedding for EDSL\":
+-- | Slightly adapted code from the paper \"Combining Deep and Shallow Embedding for EDSL\"
+-- (published in Trends in Functional Programming TFP 2012):
 --
 --   * <http://www.cse.chalmers.se/~emax/documents/svenningsson2013combining.pdf>
 --
@@ -22,7 +23,7 @@
 --
 --   * The 'Syntactic' class is used to connect the deep and the shallow embeddings.
 --
--- The approach has the following advantages:
+-- The approach has several advantages:
 --
 --   * /Simplicity/ -- Moving functionality to shallow embeddings helps keep the AST small without sacrificing expressiveness.
 --
