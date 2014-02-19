@@ -37,6 +37,10 @@
 --
 -- Syntactic has generic functionality that gives some of the things defined in this module for
 -- free.
+--
+-- The Feldspar EDSL is implemented using the deep/shallow technique:
+--
+--   * <http://hackage.haskell.org/package/feldspar-language>
 
 module FunC where
 
