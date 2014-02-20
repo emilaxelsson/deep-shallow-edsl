@@ -64,6 +64,18 @@ import Data.Tree.View
 ----------------------------------------------------------------------------------------------------
 
 -- | Deep embedding of a low-level pure functional language
+--
+-- The type parameter to 'FunC' allows us to track the type of expressions. As the type of 'eval'
+-- shows, an expression @`FunC` a@ computes a value of type @a@.
+--
+-- 'FunC' is a GADT, which means that its constructors can constrain the result types. For example,
+-- the 'LitI' constructor constrains the type parameter in the result to be 'Int'. These constraints
+-- go two ways:
+--
+--   * Only well-typed 'FunC' expressions can be constructed.
+--
+--   * When pattern matching on an expression, we are allowed to assume that the constraints hold
+--     (local assumptions; see e.g. 'eval').
 data FunC a
   where
     LitI     :: Int  -> FunC Int                                                 -- Integer literals
@@ -83,6 +95,10 @@ data FunC a
     ArrIx    :: FunC (Array Int a) -> FunC Int -> FunC a                         -- Array indexing
 
 -- | Evaluation
+--
+-- Note how we make use of local assumptions to compute directly with Haskell values of different
+-- type. For example, in the first case, we are allowed to return an 'Int', even though 'eval' is
+-- polymorphic.
 eval :: FunC a -> a
 eval (LitI i)        = i
 eval (LitB b)        = b

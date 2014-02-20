@@ -34,6 +34,8 @@ data FunC a
 --     Value
 --     Variable
 
+-- Highlight use of GADT
+
 -- eval :: FunC a -> a
 
 -- toTree, etc.
@@ -119,4 +121,8 @@ data FunC a
 -- instance Functor Vector
 
 -- scalarProd
+
+-- force
+
+-- Demo fusion
 
