@@ -60,7 +60,7 @@ import Control.Monad.State
 import Data.Array
 import Data.Tree hiding (drawTree)
 
-import Data.Tree.View
+import Data.Tree.View  -- cabal install tree-view
 
 
 
@@ -346,26 +346,30 @@ instance Syntactic a => Syntactic (Vector a)
     desugar (Indexed l ixf)  = Arr l (desugar . ixf)
     sugar arr                = Indexed (len arr) (\ix -> sugar (arr <!> ix))
 
+instance Functor Vector
+  where
+    fmap f (Indexed l ixf) = Indexed l (f . ixf)
+
 -- | Overrides 'P.zipWith' from "Prelude"
 zipWith :: (Syntactic a, Syntactic b) => (a -> b -> c) -> Vector a -> Vector b -> Vector c
 zipWith f (Indexed l1 ixf1) (Indexed l2 ixf2) =
     Indexed (min l1 l2) (\ix -> f (ixf1 ix) (ixf2 ix))
 
 -- | Overrides 'P.sum' from "Prelude"
-sum :: (Syntactic a, Num a) => Vector a -> a
+sum :: Vector (FunC Int) -> FunC Int
 sum (Indexed l ixf) = forLoop l 0 (\ix s -> s + ixf ix)
-
-instance Functor Vector
-  where
-    fmap f (Indexed l ixf) = Indexed l (f . ixf)
 
 -- | Scalar product
 scalarProd :: Vector (FunC Int) -> Vector (FunC Int) -> FunC Int
-scalarProd a b = sum $ force (zipWith (*) a b)
+scalarProd a b = sum (zipWith (*) a b)
 
 -- | Force a vector to generate an array in memory
 force  :: Syntactic a => Vector a -> Vector a
 force (Indexed l ixf) = Indexed l (\n -> sugar (Arr l (desugar . ixf) <!> n))
+
+-- | Scalar product, no fusion
+scalarProd2 :: Vector (FunC Int) -> Vector (FunC Int) -> FunC Int
+scalarProd2 a b = sum $ force (zipWith (*) a b)
 
 forEach = flip fmap
 
