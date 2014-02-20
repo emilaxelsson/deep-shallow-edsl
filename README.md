@@ -26,7 +26,7 @@ This style of EDSL design is supported by the Syntactic library:
 
   * <http://hackage.haskell.org/package/syntactic>
 
-Syntactic has generic functionality that gives some of the things defined in this module for free.
+Syntactic has generic functionality that gives some of the things defined in this code for free.
 
 The Feldspar EDSL is implemented using the deep/shallow technique:
 
