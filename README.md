@@ -1,10 +1,7 @@
 deep-shallow-edsl
 =================
 
-Slightly adapted code from the paper "Combining Deep and Shallow Embedding for EDSL" (J. Svenningsson and E. Axelsson, published in Trends in Functional Programming TFP 2013):
-
-  * <http://www.cse.chalmers.se/~emax/documents/svenningsson2013combining.pdf>
-  * <http://dx.doi.org/10.1007/978-3-642-40447-4_2>
+Slightly adapted code from the paper ["Combining Deep and Shallow Embedding for EDSL"](http://www.cse.chalmers.se/~emax/documents/svenningsson2013combining.pdf) (J. Svenningsson and E. Axelsson, published in Trends in Functional Programming TFP 2013, [DOI](http://dx.doi.org/10.1007/978-3-642-40447-4_2)):
 
 The paper descibes a design pattern for embedded DSLs (EDSLs) where a combination of deep and shallow embedding is used in order to get most advantages from both approaches.
 
@@ -22,13 +19,7 @@ The approach has several advantages:
       - The shallow interfaces can have properties not possessed by the deep embedding. For example, the `Vector` interface guarantees removal of intermediate structures.
       - The abstract types can sometimes be made instances of standard Haskell type classes, such as `Functor` and `Monad` (see the `Option` and `Vector` types), even when the deep embedding cannot.
 
-This style of EDSL design is supported by the Syntactic library:
+This style of EDSL design is supported by the [Syntactic library](http://hackage.haskell.org/package/syntactic). Syntactic has generic functionality that gives some of the things defined in this code for free.
 
-  * <http://hackage.haskell.org/package/syntactic>
-
-Syntactic has generic functionality that gives some of the things defined in this code for free.
-
-The Feldspar EDSL is implemented using the deep/shallow technique:
-
-  * <http://hackage.haskell.org/package/feldspar-language>
+The [Feldspar EDSL](http://hackage.haskell.org/package/feldspar-language) is implemented using the deep/shallow technique.
 
