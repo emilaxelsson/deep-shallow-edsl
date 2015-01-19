@@ -1,7 +1,7 @@
 deep-shallow-edsl
 =================
 
-Slightly adapted code from the paper "Combining Deep and Shallow Embedding for EDSL" (published in Trends in Functional Programming TFP 2013):
+Slightly adapted code from the paper "Combining Deep and Shallow Embedding for EDSL" (J. Svenningsson and E. Axelsson, published in Trends in Functional Programming TFP 2013):
 
   * <http://www.cse.chalmers.se/~emax/documents/svenningsson2013combining.pdf>
   * <http://dx.doi.org/10.1007/978-3-642-40447-4_2>
