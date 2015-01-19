@@ -18,7 +18,7 @@ The approach has several advantages:
 
   * **Simplicity**    -- Moving functionality to shallow embeddings helps keep the AST small without sacrificing expressiveness.
   * **Extensibility** -- New shallow embeddings can often be added without changing the deep embedding, or by just changing is slightly.
-  * **Abstraction**   -- The shallow embeddings are based on /abstract data types/ leading to better programming interfaces (more like ordinary APIs than constructs of a language). This has important side-effects:
+  * **Abstraction**   -- The shallow embeddings are based on *abstract data types* leading to better programming interfaces (more like ordinary APIs than constructs of a language). This has important side-effects:
       - The shallow interfaces can have properties not possessed by the deep embedding. For example, the `Vector` interface guarantees removal of intermediate structures.
       - The abstract types can sometimes be made instances of standard Haskell type classes, such as `Functor` and `Monad` (see the `Option` and `Vector` types), even when the deep embedding cannot.
 
