@@ -18,7 +18,7 @@ library
     GADTs,
     FlexibleContexts,
     FlexibleInstances,
-    TypeFamilies,
+    TypeFamilies
 
   build-depends:
     base <5,
