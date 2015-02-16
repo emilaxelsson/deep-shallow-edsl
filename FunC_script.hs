@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE TypeFamilies #-}
@@ -38,6 +39,8 @@ data FunC a
 
 -- eval :: FunC a -> a
 
+-- evalFun :: (FunC a -> FunC b) -> a -> b
+
 -- toTree, etc.
 
 -- Boolean literals
@@ -76,11 +79,11 @@ data FunC a
 -- * Optional values
 ----------------------------------------------------------------------
 
--- Add Undef
-
 -- Define Option
 
 -- instance Syntactic a => Syntactic (Option a)
+
+-- Inhabited class
 
 -- Define some, none, option
 

@@ -262,11 +262,6 @@ forLoop len init step = snd $ while
     (0,init)
 
 
-class    Inhabited a    where dummy :: FunC a -- An arbitrary value of type @FunC a@
-instance Inhabited Bool where dummy = false
-instance Inhabited Int  where dummy = 0
-
-
 
 ----------------------------------------------------------------------------------------------------
 -- * Optional values
@@ -280,6 +275,10 @@ instance Syntactic a => Syntactic (Option a)
     type Internal (Option a) = (Bool,Internal a)
     sugar m                  = fmap sugar $ Option (Fst m) (Snd m)
     desugar (Option b a)     = Pair (desugar b) (desugar a)
+
+class    Inhabited a    where dummy :: FunC a -- An arbitrary value of type @FunC a@
+instance Inhabited Bool where dummy = false
+instance Inhabited Int  where dummy = 0
 
 -- | Corresponds to 'Just'
 some :: a -> Option a
