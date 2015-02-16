@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE TypeFamilies #-}
@@ -97,7 +98,6 @@ data FunC a
     Prim2    :: String -> (a -> b -> c) -> FunC a -> FunC b -> FunC c            -- Primitive 2-ary function
     Value    :: a -> FunC a                                                      -- Variable substitution ('eval')
     Variable :: String -> FunC a                                                 -- Variable substitution ('toTree')
-    Undef    :: FunC a                                                           -- "Bottom"
     Arr      :: FunC Int -> (FunC Int -> FunC a) -> FunC (Array Int a)           -- Array construction
     ArrLen   :: FunC (Array Int a) -> FunC Int                                   -- Array length
     ArrIx    :: FunC (Array Int a) -> FunC Int -> FunC a                         -- Array indexing
@@ -118,7 +118,6 @@ eval (Snd p)         = snd (eval p)
 eval (Prim1 _ f a)   = f (eval a)
 eval (Prim2 _ f a b) = f (eval a) (eval b)
 eval (Value a)       = a
-eval Undef           = undefined
 eval (Arr l ixf)     = listArray (0,lm1) $ map (eval . ixf . Value) [0..lm1]
                          where lm1 = eval l - 1
 eval (ArrLen a)      = (1 +) $ uncurry (flip (-)) $ bounds $ eval a
@@ -153,7 +152,6 @@ toTree' (Snd p)         = fmap (Node "Snd") $ sequence [toTree' p]
 toTree' (Prim1 f _ a)   = fmap (Node f) $ sequence [toTree' a]
 toTree' (Prim2 f _ a b) = fmap (Node f) $ sequence [toTree' a, toTree' b]
 toTree' (Variable v)    = return $ Node v []
-toTree' Undef           = return $ Node "Undef" []
 toTree' (Arr l ixf)     = do v <- freshVar
                              let var = Variable (showVar v)
                              fmap (Node ("Arr " ++ showVar v)) $
@@ -260,9 +258,10 @@ forLoop len init step = snd $ while
     (\(i,s) -> (i+1, step i s))
     (0,init)
 
--- | Bottom
-undef :: Syntactic a => a
-undef = sugar Undef
+
+class    Inhabited a    where dummy :: FunC a -- An arbitrary value of type @FunC a@
+instance Inhabited Bool where dummy = false
+instance Inhabited Int  where dummy = 0
 
 
 
@@ -284,8 +283,8 @@ some :: a -> Option a
 some a = Option true a
 
 -- | Corresponds to 'Nothing'
-none :: Syntactic a => Option a
-none = Option false undef
+none :: (Syntactic a, Inhabited (Internal a)) => Option a
+none = Option false (sugar dummy)
 
 -- | Corresponds to 'maybe'
 option :: Syntactic b => b -> (a -> b) -> Option a -> b
