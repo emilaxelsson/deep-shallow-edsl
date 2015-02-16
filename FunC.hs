@@ -111,17 +111,20 @@ eval :: FunC a -> a
 eval (LitI i)        = i
 eval (LitB b)        = b
 eval (If c t e)      = if eval c then eval t else eval e
-eval (While c b i)   = head $ dropWhile (eval . c . Value) $ iterate (eval . b . Value) $ eval i
+eval (While c b i)   = head $ dropWhile (evalFun c) $ iterate (evalFun b) $ eval i
 eval (Pair a b)      = (eval a, eval b)
 eval (Fst p)         = fst (eval p)
 eval (Snd p)         = snd (eval p)
 eval (Prim1 _ f a)   = f (eval a)
 eval (Prim2 _ f a b) = f (eval a) (eval b)
 eval (Value a)       = a
-eval (Arr l ixf)     = listArray (0,lm1) $ map (eval . ixf . Value) [0..lm1]
+eval (Arr l ixf)     = listArray (0,lm1) $ map (evalFun ixf) [0..lm1]
                          where lm1 = eval l - 1
 eval (ArrLen a)      = (1 +) $ uncurry (flip (-)) $ bounds $ eval a
 eval (ArrIx a i)     = eval a ! eval i
+
+evalFun :: (FunC a -> FunC b) -> a -> b
+evalFun f = eval . f . Value
 
 -- | Conversion to tree
 toTree :: FunC a -> Tree String
@@ -195,7 +198,7 @@ not = Prim1 "not" (P.not)
 min :: Ord a => FunC a -> FunC a -> FunC a
 min = Prim2 "min" P.min
 
--- | While loop (non overloaded)
+-- | While loop (non-overloaded)
 while' :: (FunC s -> FunC Bool) -> (FunC s -> FunC s) -> (FunC s -> FunC s)
 while' c b i = While c b i
 
