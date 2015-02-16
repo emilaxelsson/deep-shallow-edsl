@@ -15,12 +15,10 @@ library
     FunC
 
   other-extensions:
-    GADTs, TypeOperators,
+    GADTs,
+    FlexibleContexts,
     FlexibleInstances,
     TypeFamilies,
-    MultiParamTypeClasses,
-    OverlappingInstances,
-    RankNTypes
 
   build-depends:
     base <5,
