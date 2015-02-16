@@ -56,6 +56,7 @@ module FunC where
 import Prelude hiding ((==), (<), not, min, zipWith, sum)
 import qualified Prelude as P
 
+import Control.Applicative (Applicative (..))
 import Control.Monad.State
 import Data.Array
 import Data.Tree hiding (drawTree)
@@ -296,6 +297,11 @@ option noneCase someCase opt =
 instance Functor Option
   where
     fmap f (Option b a) = Option b (f a)
+
+instance Applicative Option
+  where
+    pure  = return
+    (<*>) = ap
 
 instance Monad Option
   where
