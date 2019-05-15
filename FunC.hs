@@ -48,7 +48,7 @@
 --
 -- The Feldspar EDSL is implemented using the deep/shallow technique:
 --
---   * <http://hackage.haskell.org/package/feldspar-language>
+--   * <https://feldspar.github.io>
 
 module FunC where
 

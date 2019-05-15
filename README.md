@@ -21,5 +21,5 @@ The approach has several advantages:
 
 This style of EDSL design is supported by the [Syntactic library](http://hackage.haskell.org/package/syntactic). Syntactic has generic functionality that gives some of the things defined in this code for free.
 
-The [Feldspar EDSL](http://hackage.haskell.org/package/feldspar-language) is implemented using the deep/shallow technique.
+The [Feldspar EDSL](https://feldspar.github.io) is implemented using the deep/shallow technique.
 
