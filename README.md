@@ -3,6 +3,8 @@ deep-shallow-edsl
 
 Slightly adapted code from the paper ["Combining Deep and Shallow Embedding for EDSL"](https://emilaxelsson.github.io/documents/svenningsson2013combining.pdf) (J. Svenningsson and E. Axelsson, published in Trends in Functional Programming TFP 2013, [DOI](http://dx.doi.org/10.1007/978-3-642-40447-4_2)).
 
+  * See also the [journal version](https://emilaxelsson.github.io/documents/svenningsson2015combining.pdf) of the paper.
+
 The paper descibes a design pattern for embedded DSLs (EDSLs) where a combination of deep and shallow embedding is used in order to get most advantages from both approaches.
 
 In short, the idea is as follows:
